@@ -1,0 +1,343 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* ===== GLOBAL BASE ===== */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #050510;
+    color: #e8e8e8;
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+    transition: filter 1s ease;
+  }
+
+  body.dark-side {
+    filter: hue-rotate(310deg) saturate(1.5) brightness(0.85);
+  }
+
+  ::selection {
+    background: rgba(0, 180, 216, 0.3);
+    color: #90e0ef;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #050510; }
+  ::-webkit-scrollbar-thumb { background: #00b4d8; border-radius: 2px; }
+}
+
+/* ===== STAR FIELD BACKGROUND ===== */
+.star-field {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(1px 1px at 10% 20%, white 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 5%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(2px 2px at 50% 40%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 15%, white 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 55%, rgba(255,255,255,0.7) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 70%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 60% 80%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 90%, rgba(255,255,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 60%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 35%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(2px 2px at 15% 45%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 10%, rgba(200,220,255,0.8) 0%, transparent 100%),
+    radial-gradient(1px 1px at 95% 25%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 88%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(3px 3px at 80% 70%, rgba(144,224,239,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 65% 50%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    #050510;
+  background-size: 2000px 1200px;
+  animation: starField 80s linear infinite;
+}
+
+@keyframes starField {
+  0%   { background-position: 0 0; }
+  100% { background-position: -2000px 1000px; }
+}
+
+/* ===== LIGHTSABER SVG DIVIDER ===== */
+.lightsaber-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 2rem 0;
+  position: relative;
+}
+
+.saber-line {
+  height: 2px;
+  flex: 1;
+  max-width: 300px;
+  background: linear-gradient(90deg, transparent, #00b4d8, transparent);
+  box-shadow: 0 0 8px #00b4d8;
+}
+
+.saber-line.red {
+  background: linear-gradient(90deg, transparent, #ff0a54, transparent);
+  box-shadow: 0 0 8px #ff0a54;
+}
+
+/* ===== HOLOGRAM CARD ===== */
+.holo-card {
+  background: linear-gradient(135deg, rgba(0,180,216,0.05) 0%, rgba(22,33,62,0.8) 100%);
+  border: 1px solid rgba(0,180,216,0.2);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.holo-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0,180,216,0.03) 50%,
+    transparent 100%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.holo-card:hover {
+  border-color: rgba(0,180,216,0.5);
+  box-shadow: 0 0 30px rgba(0,180,216,0.15), 0 20px 60px rgba(0,0,0,0.6);
+  transform: translateY(-6px);
+}
+
+/* ===== SCAN LINE EFFECT ===== */
+.scan-lines::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(transparent, rgba(0,180,216,0.3), transparent);
+  animation: scanLine 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scanLine {
+  0%   { top: -2px; }
+  100% { top: 100%; }
+}
+
+/* ===== IMPERIAL GRID ===== */
+.imperial-grid {
+  background-image:
+    linear-gradient(rgba(0,180,216,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,216,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ===== CORNER BRACKETS ===== */
+.bracket-corner {
+  position: relative;
+}
+.bracket-corner::before,
+.bracket-corner::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: #00b4d8;
+  border-style: solid;
+  opacity: 0.6;
+}
+.bracket-corner::before {
+  top: 0; left: 0;
+  border-width: 2px 0 0 2px;
+}
+.bracket-corner::after {
+  bottom: 0; right: 0;
+  border-width: 0 2px 2px 0;
+}
+
+/* ===== GLITCH TEXT ===== */
+.glitch {
+  position: relative;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+}
+.glitch::before {
+  color: #ff0a54;
+  animation: glitch1 4s infinite;
+  clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+}
+.glitch::after {
+  color: #00b4d8;
+  animation: glitch2 4s infinite;
+  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+}
+
+@keyframes glitch1 {
+  0%, 90%, 100% { transform: translate(0); }
+  92%           { transform: translate(-2px, 1px); }
+  94%           { transform: translate(2px, -1px); }
+  96%           { transform: translate(-1px, 2px); }
+}
+@keyframes glitch2 {
+  0%, 90%, 100% { transform: translate(0); }
+  92%           { transform: translate(2px, -1px); }
+  94%           { transform: translate(-2px, 1px); }
+  96%           { transform: translate(1px, -2px); }
+}
+
+/* ===== PRELOADER ===== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #050510;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* ===== DEATH STAR SVG LOADER ===== */
+.death-star-loader {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+/* ===== NAV ACTIVE ===== */
+.nav-link {
+  position: relative;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: rgba(200,200,220,0.6);
+  transition: color 0.3s;
+  text-transform: uppercase;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #00b4d8;
+  box-shadow: 0 0 6px #00b4d8;
+  transition: width 0.3s;
+}
+.nav-link:hover { color: #00b4d8; }
+.nav-link:hover::after { width: 100%; }
+
+/* ===== TIMELINE ===== */
+.force-timeline {
+  position: relative;
+}
+.force-timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, #00b4d840, #00b4d8, #00b4d840, transparent);
+  transform: translateX(-50%);
+}
+
+/* ===== SKILL ORB ===== */
+.skill-orb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,180,216,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.4s;
+  background: rgba(0,180,216,0.05);
+}
+.skill-orb::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,180,216,0.15);
+  animation: beacon 3s ease-in-out infinite;
+}
+.skill-orb:hover {
+  border-color: #00b4d8;
+  background: rgba(0,180,216,0.1);
+  box-shadow: 0 0 20px rgba(0,180,216,0.3);
+}
+
+@keyframes beacon {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50%       { transform: scale(1.3); opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* ===== CRAWL ===== */
+.crawl-container {
+  perspective: 400px;
+  overflow: hidden;
+}
+.crawl-text {
+  transform-origin: 50% 100%;
+  transform: rotateX(25deg);
+  animation: crawl 20s linear forwards;
+}
+@keyframes crawl {
+  from { margin-top: 100%; }
+  to   { margin-top: -200%; }
+}
+
+/* ===== NEBULA GLOW ===== */
+.nebula-glow {
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(123,47,190,0.15) 0%,
+    rgba(0,180,216,0.08) 40%,
+    transparent 70%
+  );
+}
+
+/* ===== SECTION REVEAL ===== */
+.section-header::before {
+  content: attr(data-prefix);
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: #00b4d8;
+  letter-spacing: 0.3em;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
+
+/* ===== RESPONSIVE UTILITIES ===== */
+@media (max-width: 767px) {
+  .force-timeline::before { left: 16px; }
+  .mobile-stack { flex-direction: column !important; }
+}
