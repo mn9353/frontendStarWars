@@ -1,13 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface PreloaderProps {
   onComplete: () => void;
 }
 
-export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
-  const [progress, setProgress] = React.useState(0);
-  const [phase, setPhase] = React.useState<'loading' | 'text' | 'enter' | 'done'>('loading');
+export const Preloader = ({ onComplete }: PreloaderProps) => {
+  const [progress, setProgress] = useState(0);
+  const [phase, setPhase] = useState<'loading' | 'text' | 'enter' | 'done'>('loading');
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -144,7 +144,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
                   >
                   Enter Galaxy
                 </motion.button>
-              )}
+              }
             </AnimatePresence>
           </div>
         </motion.div>

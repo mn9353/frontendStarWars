@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 const skills = [
@@ -22,7 +21,7 @@ const skills = [
   },
 ];
 
-export const SkillsSection: React.FC = () => {
+export const SkillsSection = () => {
   return (
     <section className="py-16 md:py-24 px-4 md:px-20 relative" id="arsenal">
       <div className="max-w-6xl mx-auto">

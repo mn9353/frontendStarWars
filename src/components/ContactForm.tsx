@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useAudio } from '../hooks/useAudio';
 
-export const ContactForm: React.FC = () => {
+export const ContactForm = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, amount: 0.3 });
   const { playSubmit } = useAudio();

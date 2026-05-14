@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 interface AudioToggleProps {
@@ -6,7 +5,7 @@ interface AudioToggleProps {
   toggleMute: () => void;
 }
 
-export const AudioToggle: React.FC<AudioToggleProps> = ({ isMuted, toggleMute }) => {
+export const AudioToggle = ({ isMuted, toggleMute }: AudioToggleProps) => {
   return (
     <motion.button
       whileHover={{ scale: 1.1 }}

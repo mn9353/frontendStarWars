@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { useAudio } from '../hooks/useAudio';
 
@@ -19,7 +18,7 @@ const colorMap = {
   gold:  { border: 'rgba(247,201,72,0.3)',  glow: '#f7c948', text: '#f7c948',  shadow: 'rgba(247,201,72,0.2)' },
 };
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({ title, subtitle, description, tags, icon, color, index }) => {
+export const ProjectCard = ({ title, subtitle, description, tags, icon, color, index }: ProjectCardProps) => {
   const c = colorMap[color];
   const { playClick } = useAudio();
 

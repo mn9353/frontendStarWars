@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Preloader } from './components/Preloader';
 import { ProjectCard } from './components/ProjectCard';
@@ -339,7 +339,7 @@ function App() {
             </section>
 
             {/* Divider */}
-            <LightsaberDivider color="blue" />
+            <LightsaberDivider color="blue" isDark={darkSide} />
 
             {/* =================== ABOUT (CHRONICLES) =================== */}
             <section id="chronicles" className="py-16 md:py-24 px-4 md:px-20 relative">
@@ -382,7 +382,7 @@ function App() {
             </section>
 
             {/* Divider */}
-            <LightsaberDivider color="red" />
+            <LightsaberDivider color="green" isDark={darkSide} />
 
             {/* =================== EXPERIENCE (CAMPAIGNS) =================== */}
             <section id="campaigns" className="py-16 md:py-24 px-4 md:px-20 relative">
@@ -478,13 +478,13 @@ function App() {
             </section>
 
             {/* Divider */}
-            <LightsaberDivider color="red" />
+            <LightsaberDivider color="green" isDark={darkSide} />
 
             {/* =================== SKILLS (FORCE) =================== */}
             <SkillsSection />
 
             {/* Divider */}
-            <LightsaberDivider color="blue" />
+            <LightsaberDivider color="blue" isDark={darkSide} />
 
             {/* =================== CONTACT =================== */}
             <ContactForm />

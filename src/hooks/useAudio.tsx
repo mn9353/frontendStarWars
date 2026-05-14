@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useRef, type ReactNode } from 'react';
 
 interface AudioContextType {
   isMuted: boolean;
@@ -11,7 +11,7 @@ interface AudioContextType {
 
 const AudioContext = createContext<AudioContextType | null>(null);
 
-export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AudioProvider = ({ children }: { children: ReactNode }) => {
   const [isMuted, setIsMuted] = useState(false); // Default to unmuted
   const isMutedRef = useRef(false);
   const [bgAllowed, setBgAllowed] = useState(false);
