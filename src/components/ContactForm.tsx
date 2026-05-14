@@ -25,7 +25,7 @@ export const ContactForm = () => {
             Transmit your message across the HoloNet
           </p>
           <div className="w-32 h-px bg-gradient-to-r from-transparent via-saber-blue to-transparent mx-auto mt-6"
-            style={{ boxShadow: '0 0 8px #00b4d8' }} />
+            style={{ boxShadow: '0 0 8px var(--primary-hex)' }} />
         </motion.div>
 
         {/* Form card */}
@@ -98,10 +98,10 @@ export const ContactForm = () => {
               <motion.button
                 type="submit"
                 onClick={e => { e.preventDefault(); playSubmit(); }}
-                whileHover={{ scale: 1.03, boxShadow: '0 0 30px rgba(0,180,216,0.4)' }}
+                whileHover={{ scale: 1.03, boxShadow: '0 0 30px rgba(var(--primary-rgb),0.4)' }}
                 whileTap={{ scale: 0.97 }}
                 className="relative px-10 py-4 font-orbitron text-xs tracking-[0.3em] text-space-black bg-saber-blue rounded overflow-hidden group uppercase"
-                style={{ boxShadow: '0 0 15px rgba(0,180,216,0.3)' }}
+                style={{ boxShadow: '0 0 15px rgba(var(--primary-rgb),0.3)' }}
               >
                 <span className="relative z-10">TRANSMIT SIGNAL</span>
                 <div className="absolute inset-0 bg-saber-cyan opacity-0 group-hover:opacity-20 transition-opacity" />

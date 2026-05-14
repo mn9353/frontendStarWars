@@ -4,7 +4,7 @@ const skills = [
   {
     category: 'JEDI FRONTEND',
     icon: '⚡',
-    color: '#00b4d8',
+    color: 'var(--primary-hex)',
     items: ['React & Next.js', 'TypeScript', 'Three.js / WebGL', 'Framer Motion'],
   },
   {
@@ -37,7 +37,7 @@ export const SkillsSection = () => {
             THE FORCE ARSENAL
           </h2>
           <div className="w-32 h-px bg-gradient-to-r from-transparent via-saber-blue to-transparent mx-auto"
-            style={{ boxShadow: '0 0 8px #00b4d8' }} />
+            style={{ boxShadow: '0 0 8px var(--primary-hex)' }} />
         </motion.div>
 
         {/* Skills grid */}

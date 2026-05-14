@@ -65,7 +65,9 @@ const experience = [
    LIGHTSABER DIVIDER
    ===================== */
 const LightsaberDivider = ({ color = 'blue', isDark }: { color?: 'blue' | 'green', isDark: boolean }) => {
-  const glowColor = isDark ? '#ff0a54' : (color === 'green' ? '#39ff14' : '#00b4d8');
+  // If dark side is active, fall back to 'blue' so that the global hue-rotate can turn it red!
+  const actualColor = isDark ? 'blue' : color;
+  const glowColor = actualColor === 'green' ? '#39ff14' : 'var(--primary-hex)';
   return (
     <div className="lightsaber-divider my-4 px-4">
       <div className="saber-line" style={{ background: `linear-gradient(90deg, transparent, ${glowColor}, transparent)`, boxShadow: `0 0 8px ${glowColor}` }} />
@@ -92,7 +94,7 @@ const NebulaBackground = () => (
     <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-[0.06]"
       style={{ background: 'radial-gradient(circle, #7b2fbe 0%, transparent 70%)', filter: 'blur(60px)' }} />
     <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full opacity-[0.05]"
-      style={{ background: 'radial-gradient(circle, #00b4d8 0%, transparent 70%)', filter: 'blur(80px)' }} />
+      style={{ background: 'radial-gradient(circle, var(--primary-hex) 0%, transparent 70%)', filter: 'blur(80px)' }} />
     <div className="absolute top-2/3 left-1/2 w-64 h-64 rounded-full opacity-[0.04]"
       style={{ background: 'radial-gradient(circle, #ff0a54 0%, transparent 70%)', filter: 'blur(100px)' }} />
     {/* Imperial grid overlay */}
@@ -136,11 +138,11 @@ function App() {
 
             {/* =================== NAVIGATION =================== */}
             <header className="fixed top-0 left-0 right-0 z-[100] px-4 sm:px-10 py-4 sm:py-5"
-              style={{ background: 'rgba(5,5,16,0.85)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(0,180,216,0.1)' }}>
+              style={{ background: 'rgba(5,5,16,0.85)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(var(--primary-rgb),0.1)' }}>
               <div className="max-w-7xl mx-auto flex items-center justify-between">
                 {/* Logo */}
                 <a href="#hero" className="font-orbitron text-saber-blue text-base sm:text-lg tracking-[0.2em] font-bold"
-                  style={{ textShadow: '0 0 20px rgba(0,180,216,0.6)' }}>
+                  style={{ textShadow: '0 0 20px rgba(var(--primary-rgb),0.6)' }}>
                   MNJ<span className="text-republic-white/40">://</span>MANOJ
                 </a>
 
@@ -161,9 +163,9 @@ function App() {
                     onClick={() => { setDarkSide(d => !d); playLightsaber(); }}
                     className="font-orbitron text-[9px] tracking-[0.2em] px-3 py-2 rounded border transition-all"
                     style={{
-                      color: darkSide ? '#ff0a54' : '#00b4d8',
-                      borderColor: darkSide ? 'rgba(255,10,84,0.4)' : 'rgba(0,180,216,0.4)',
-                      background: darkSide ? 'rgba(255,10,84,0.08)' : 'rgba(0,180,216,0.08)',
+                      color: 'var(--primary-hex)',
+                      borderColor: 'rgba(var(--primary-rgb),0.4)',
+                      background: 'rgba(var(--primary-rgb),0.08)',
                     }}>
                     {darkSide ? '🔴 DARK SIDE' : '🔵 LIGHT SIDE'}
                   </button>
@@ -172,15 +174,15 @@ function App() {
                   <a href="#contact"
                     onClick={playClick}
                     className="hidden sm:block font-orbitron text-[9px] tracking-[0.2em] px-5 py-2 rounded bg-saber-blue text-space-black font-bold uppercase"
-                    style={{ boxShadow: '0 0 15px rgba(0,180,216,0.4)' }}>
+                    style={{ boxShadow: '0 0 15px rgba(var(--primary-rgb),0.4)' }}>
                     Hire Me
                   </a>
 
                   {/* Hamburger */}
                   <button className="md:hidden p-2" onClick={() => { setMenuOpen(m => !m); playClick(); }}>
-                    <div className={`w-5 h-0.5 bg-saber-blue mb-1 transition-all ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} style={{ boxShadow: '0 0 4px #00b4d8' }} />
-                    <div className={`w-5 h-0.5 bg-saber-blue mb-1 transition-all ${menuOpen ? 'opacity-0' : ''}`} style={{ boxShadow: '0 0 4px #00b4d8' }} />
-                    <div className={`w-5 h-0.5 bg-saber-blue transition-all ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} style={{ boxShadow: '0 0 4px #00b4d8' }} />
+                    <div className={`w-5 h-0.5 bg-saber-blue mb-1 transition-all ${menuOpen ? 'rotate-45 translate-y-1.5' : ''}`} style={{ boxShadow: '0 0 4px var(--primary-hex)' }} />
+                    <div className={`w-5 h-0.5 bg-saber-blue mb-1 transition-all ${menuOpen ? 'opacity-0' : ''}`} style={{ boxShadow: '0 0 4px var(--primary-hex)' }} />
+                    <div className={`w-5 h-0.5 bg-saber-blue transition-all ${menuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} style={{ boxShadow: '0 0 4px var(--primary-hex)' }} />
                   </button>
                 </div>
               </div>
@@ -229,21 +231,21 @@ function App() {
               >
                 <svg width="140" height="140" viewBox="0 0 140 140" className="sm:w-[160px] sm:h-[160px]">
                   <circle cx="70" cy="70" r="65" fill="#0a0a1a"
-                    stroke="rgba(0,180,216,0.3)" strokeWidth="1" />
-                  <line x1="10" y1="70" x2="130" y2="70" stroke="rgba(0,180,216,0.2)" strokeWidth="1" />
-                  <circle cx="50" cy="52" r="14" fill="#111130" stroke="rgba(0,180,216,0.4)" strokeWidth="1.5" />
-                  <circle cx="50" cy="52" r="7" fill="#0d0d22" stroke="rgba(0,180,216,0.6)" strokeWidth="1" />
-                  <circle cx="50" cy="52" r="3" fill="#00b4d8"
-                    style={{ filter: 'drop-shadow(0 0 8px #00b4d8)' }} />
-                  <circle cx="70" cy="70" r="40" fill="none" stroke="rgba(0,180,216,0.06)" strokeWidth="1" />
-                  <circle cx="70" cy="70" r="65" fill="none" stroke="rgba(0,180,216,0.15)" strokeWidth="1" strokeDasharray="8 4" />
+                    stroke="rgba(var(--primary-rgb),0.3)" strokeWidth="1" />
+                  <line x1="10" y1="70" x2="130" y2="70" stroke="rgba(var(--primary-rgb),0.2)" strokeWidth="1" />
+                  <circle cx="50" cy="52" r="14" fill="#111130" stroke="rgba(var(--primary-rgb),0.4)" strokeWidth="1.5" />
+                  <circle cx="50" cy="52" r="7" fill="#0d0d22" stroke="rgba(var(--primary-rgb),0.6)" strokeWidth="1" />
+                  <circle cx="50" cy="52" r="3" fill="var(--primary-hex)"
+                    style={{ filter: 'drop-shadow(0 0 8px var(--primary-hex))' }} />
+                  <circle cx="70" cy="70" r="40" fill="none" stroke="rgba(var(--primary-rgb),0.06)" strokeWidth="1" />
+                  <circle cx="70" cy="70" r="65" fill="none" stroke="rgba(var(--primary-rgb),0.15)" strokeWidth="1" strokeDasharray="8 4" />
                 </svg>
                 {/* Orbit ring */}
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
                   className="absolute inset-[-20px] rounded-full border opacity-20"
-                  style={{ borderColor: '#00b4d8', borderStyle: 'dashed' }}
+                  style={{ borderColor: 'var(--primary-hex)', borderStyle: 'dashed' }}
                 />
               </motion.div>
 
@@ -257,16 +259,17 @@ function App() {
                 transition={{ duration: 1, delay: 0.3 }}
                 data-text="MANOJ N."
                 className="glitch font-orbitron text-4xl sm:text-6xl md:text-8xl text-republic-white mb-2 tracking-[0.15em] sm:tracking-[0.25em] leading-tight"
-                style={{ textShadow: `0 0 40px ${darkSide ? 'rgba(255,10,84,0.4)' : 'rgba(0,180,216,0.4)'}, 0 0 80px ${darkSide ? 'rgba(255,10,84,0.2)' : 'rgba(0,180,216,0.2)'}` }}
+                style={{ textShadow: `0 0 40px rgba(var(--primary-rgb),0.4), 0 0 80px rgba(var(--primary-rgb),0.2)` }}
               >
                 MANOJ N.
               </motion.h1>
 
               {/* Proper Lightsaber Element */}
               <motion.div
+                key={darkSide ? 'dark-saber' : 'light-saber'}
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
                 className="w-full max-w-[280px] sm:max-w-sm mx-auto mb-6 flex items-center justify-center"
                 style={{ transformOrigin: 'left' }}
               >
@@ -277,7 +280,7 @@ function App() {
                   <rect x="14" y="4" width="41" height="2" fill="#555" />
                   <rect x="14" y="12" width="41" height="2" fill="#555" />
                   <rect x="57" y="2" width="20" height="14" fill="#333" rx="2" />
-                  <circle cx="35" cy="9" r="3" fill={darkSide ? '#ff0a54' : '#00b4d8'} style={{ filter: `drop-shadow(0 0 4px ${darkSide ? '#ff0a54' : '#00b4d8'})` }} />
+                  <circle cx="35" cy="9" r="3" fill="var(--primary-hex)" style={{ filter: `drop-shadow(0 0 4px var(--primary-hex))` }} />
                   {/* Guard */}
                   <rect x="75" y="0" width="4" height="18" fill="#aaa" rx="1" />
                 </svg>
@@ -285,12 +288,12 @@ function App() {
                 <div className="flex-1 h-3 rounded-r-full relative overflow-hidden" 
                      style={{ 
                        backgroundColor: '#fff', 
-                       boxShadow: `0 0 10px ${darkSide ? '#ff0a54' : '#00b4d8'}, 0 0 20px ${darkSide ? '#ff0a54' : '#00b4d8'}, 0 0 40px ${darkSide ? '#ff0a54' : '#00b4d8'}` 
+                       boxShadow: `0 0 10px var(--primary-hex), 0 0 20px var(--primary-hex), 0 0 40px var(--primary-hex)` 
                      }}>
                   <motion.div 
                     initial={{ x: '-100%' }}
                     animate={{ x: 0 }}
-                    transition={{ duration: 0.2, delay: 1.0, ease: "linear" }}
+                    transition={{ duration: 0.3, delay: 0.5, ease: "linear" }}
                     className="absolute inset-0 bg-white"
                   />
                 </div>
@@ -314,13 +317,13 @@ function App() {
                 <a href="#chronicles"
                   onClick={playClick}
                   className="w-full sm:w-auto px-8 py-4 bg-saber-blue text-space-black font-orbitron text-[11px] tracking-[0.25em] rounded uppercase text-center font-bold"
-                  style={{ boxShadow: '0 0 25px rgba(0,180,216,0.5)' }}>
+                  style={{ boxShadow: '0 0 25px rgba(var(--primary-rgb),0.5)' }}>
                   ⚡ EXPLORE CHRONICLES
                 </a>
                 <a href="#contact"
                   onClick={playClick}
                   className="w-full sm:w-auto px-8 py-4 border text-saber-blue font-orbitron text-[11px] tracking-[0.25em] rounded uppercase text-center"
-                  style={{ borderColor: 'rgba(0,180,216,0.4)', background: 'rgba(0,180,216,0.05)' }}>
+                  style={{ borderColor: 'rgba(var(--primary-rgb),0.4)', background: 'rgba(var(--primary-rgb),0.05)' }}>
                   📡 OPEN CHANNEL
                 </a>
               </motion.div>
@@ -398,16 +401,16 @@ function App() {
                     GALACTIC CAMPAIGNS
                   </h2>
                   <div className="w-32 h-px bg-gradient-to-r from-transparent via-saber-blue to-transparent mx-auto mt-6"
-                    style={{ boxShadow: '0 0 8px #00b4d8' }} />
+                    style={{ boxShadow: '0 0 8px var(--primary-hex)' }} />
                 </motion.div>
 
                 {/* Timeline */}
                 <div className="relative">
                   {/* Center line (desktop) / Left line (mobile) */}
                   <div className="absolute hidden md:block"
-                    style={{ left: '50%', top: 0, bottom: 0, width: '1px', background: 'linear-gradient(180deg, transparent, #00b4d840, #00b4d8, #00b4d840, transparent)', transform: 'translateX(-50%)' }} />
+                    style={{ left: '50%', top: 0, bottom: 0, width: '1px', background: 'linear-gradient(180deg, transparent, var(--primary-hex)40, var(--primary-hex), var(--primary-hex)40, transparent)', transform: 'translateX(-50%)' }} />
                   <div className="absolute md:hidden"
-                    style={{ left: '16px', top: 0, bottom: 0, width: '1px', background: 'linear-gradient(180deg, transparent, #00b4d840, #00b4d8, #00b4d840, transparent)' }} />
+                    style={{ left: '16px', top: 0, bottom: 0, width: '1px', background: 'linear-gradient(180deg, transparent, var(--primary-hex)40, var(--primary-hex), var(--primary-hex)40, transparent)' }} />
 
                   <div className="space-y-12 md:space-y-16">
                     {experience.map((exp, i) => (
@@ -421,23 +424,23 @@ function App() {
                       >
                         {/* Timeline dot */}
                         <div className="absolute hidden md:flex left-1/2 top-6 w-4 h-4 rounded-full -translate-x-1/2 items-center justify-center z-10"
-                          style={{ background: exp.side === 'light' ? '#00b4d8' : '#ff0a54', boxShadow: `0 0 12px ${exp.side === 'light' ? '#00b4d8' : '#ff0a54'}` }}>
+                          style={{ background: exp.side === 'light' ? 'var(--primary-hex)' : 'var(--primary-hex)', boxShadow: `0 0 12px ${exp.side === 'light' ? 'var(--primary-hex)' : 'var(--primary-hex)'}` }}>
                         </div>
                         <div className="absolute md:hidden left-[10px] top-6 w-3 h-3 rounded-full z-10"
-                          style={{ background: exp.side === 'light' ? '#00b4d8' : '#ff0a54', boxShadow: `0 0 8px ${exp.side === 'light' ? '#00b4d8' : '#ff0a54'}` }} />
+                          style={{ background: exp.side === 'light' ? 'var(--primary-hex)' : 'var(--primary-hex)', boxShadow: `0 0 8px ${exp.side === 'light' ? 'var(--primary-hex)' : 'var(--primary-hex)'}` }} />
 
                         {/* Card */}
                         <div className="holo-card bracket-corner rounded-lg p-5 sm:p-7 md:w-[46%] w-full group"
-                          style={{ borderColor: exp.side === 'light' ? 'rgba(0,180,216,0.2)' : 'rgba(255,10,84,0.2)' }}>
+                          style={{ borderColor: exp.side === 'light' ? 'rgba(var(--primary-rgb),0.2)' : 'rgba(var(--primary-rgb),0.2)' }}>
                           <span className="font-mono text-[9px] tracking-[0.3em] opacity-60 block mb-1"
-                            style={{ color: exp.side === 'light' ? '#00b4d8' : '#ff0a54' }}>
+                            style={{ color: exp.side === 'light' ? 'var(--primary-hex)' : 'var(--primary-hex)' }}>
                             {exp.period}
                           </span>
                           <h3 className="font-orbitron text-sm sm:text-base text-republic-white mb-1 uppercase tracking-wide">
                             {exp.role}
                           </h3>
                           <div className="font-mono text-[10px] mb-3 opacity-50"
-                            style={{ color: exp.side === 'light' ? '#00b4d8' : '#ff0a54' }}>
+                            style={{ color: exp.side === 'light' ? 'var(--primary-hex)' : 'var(--primary-hex)' }}>
                             @ {exp.company}
                           </div>
                           <p className="font-rajdhani text-stardust/70 text-sm leading-relaxed">{exp.desc}</p>
@@ -466,7 +469,7 @@ function App() {
                     FORGED WEAPONS
                   </h2>
                   <div className="w-32 h-px bg-gradient-to-r from-transparent via-saber-blue to-transparent mx-auto mt-6"
-                    style={{ boxShadow: '0 0 8px #00b4d8' }} />
+                    style={{ boxShadow: '0 0 8px var(--primary-hex)' }} />
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -491,10 +494,10 @@ function App() {
 
             {/* =================== FOOTER =================== */}
             <footer className="py-12 md:py-16 px-4 border-t text-center"
-              style={{ borderColor: 'rgba(0,180,216,0.1)', background: 'rgba(5,5,16,0.9)' }}>
+              style={{ borderColor: 'rgba(var(--primary-rgb),0.1)', background: 'rgba(5,5,16,0.9)' }}>
               <div className="max-w-5xl mx-auto">
                 <div className="font-orbitron text-2xl sm:text-3xl text-saber-blue mb-3 tracking-[0.3em]"
-                  style={{ textShadow: '0 0 20px rgba(0,180,216,0.5)' }}>
+                  style={{ textShadow: '0 0 20px rgba(var(--primary-rgb),0.5)' }}>
                   MANOJ N.
                 </div>
                 <p className="font-mono text-[9px] tracking-[0.4em] text-stardust/30 mb-6 uppercase">

@@ -12,7 +12,7 @@ interface ProjectCardProps {
 }
 
 const colorMap = {
-  blue:  { border: 'rgba(0,180,216,0.3)',   glow: '#00b4d8', text: '#00b4d8',  shadow: 'rgba(0,180,216,0.2)' },
+  blue:  { border: 'rgba(var(--primary-rgb),0.3)',   glow: 'var(--primary-hex)', text: 'var(--primary-hex)',  shadow: 'rgba(var(--primary-rgb),0.2)' },
   red:   { border: 'rgba(255,10,84,0.3)',   glow: '#ff0a54', text: '#ff0a54',  shadow: 'rgba(255,10,84,0.2)' },
   green: { border: 'rgba(87,204,153,0.3)',  glow: '#57cc99', text: '#57cc99',  shadow: 'rgba(87,204,153,0.2)' },
   gold:  { border: 'rgba(247,201,72,0.3)',  glow: '#f7c948', text: '#f7c948',  shadow: 'rgba(247,201,72,0.2)' },

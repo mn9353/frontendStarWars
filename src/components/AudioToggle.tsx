@@ -12,14 +12,14 @@ export const AudioToggle = ({ isMuted, toggleMute }: AudioToggleProps) => {
       whileTap={{ scale: 0.9 }}
       onClick={(e) => { e.nativeEvent.stopImmediatePropagation(); e.stopPropagation(); toggleMute(); }}
       onTouchStart={(e) => { e.nativeEvent.stopImmediatePropagation(); e.stopPropagation(); }}
-      className="fixed bottom-6 right-6 z-[99999] p-3 rounded-full border border-saber-blue bg-[#0a0a1a] shadow-[0_0_20px_rgba(0,180,216,0.3)]"
+      className="fixed bottom-6 right-6 z-[99999] p-3 rounded-full border border-saber-blue bg-[#0a0a1a] shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)]"
       style={{
-        boxShadow: isMuted ? 'none' : '0 0 15px rgba(0,180,216,0.4)',
-        borderColor: isMuted ? 'rgba(0,180,216,0.3)' : '#00b4d8'
+        boxShadow: isMuted ? 'none' : '0 0 15px rgba(var(--primary-rgb),0.4)',
+        borderColor: isMuted ? 'rgba(var(--primary-rgb),0.3)' : 'var(--primary-hex)'
       }}
       title={isMuted ? "Enable Sound" : "Disable Sound"}
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={isMuted ? "rgba(200,200,220,0.5)" : "#00b4d8"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={isMuted ? "rgba(200,200,220,0.5)" : "var(--primary-hex)"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         {isMuted ? (
           <>
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>

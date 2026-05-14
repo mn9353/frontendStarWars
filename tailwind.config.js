@@ -12,7 +12,7 @@ export default {
         "dark-matter":   "#16213e",
         "nebula":        "#0f3460",
         // Lightsaber colors
-        "saber-blue":    "#00b4d8",
+        "saber-blue":    "var(--primary-hex)",
         "saber-cyan":    "#90e0ef",
         "saber-red":     "#ff0a54",
         "saber-green":   "#57cc99",
@@ -56,8 +56,8 @@ export default {
       },
       keyframes: {
         saberPulse: {
-          "0%, 100%": { boxShadow: "0 0 10px #00b4d8, 0 0 20px #00b4d8, 0 0 40px #00b4d880" },
-          "50%":      { boxShadow: "0 0 20px #00b4d8, 0 0 40px #00b4d8, 0 0 80px #00b4d8" },
+          "0%, 100%": { boxShadow: "0 0 10px var(--primary-hex), 0 0 20px var(--primary-hex), 0 0 40px var(--primary-hex)80" },
+          "50%":      { boxShadow: "0 0 20px var(--primary-hex), 0 0 40px var(--primary-hex), 0 0 80px var(--primary-hex)" },
         },
         hologram: {
           "0%, 100%": { opacity: "0.9", transform: "scaleY(1)" },
@@ -89,12 +89,12 @@ export default {
         },
       },
       boxShadow: {
-        "saber-blue":   "0 0 10px #00b4d8, 0 0 30px #00b4d860, 0 0 60px #00b4d830",
+        "saber-blue":   "0 0 10px var(--primary-hex), 0 0 30px var(--primary-hex)60, 0 0 60px var(--primary-hex)30",
         "saber-red":    "0 0 10px #ff0a54, 0 0 30px #ff0a5460, 0 0 60px #ff0a5430",
         "saber-green":  "0 0 10px #57cc99, 0 0 30px #57cc9960, 0 0 60px #57cc9930",
         "force-gold":   "0 0 10px #f7c948, 0 0 30px #f7c94860, 0 0 60px #f7c94830",
-        "hologram":     "0 0 40px rgba(0,180,216,0.2), inset 0 0 40px rgba(0,180,216,0.05)",
-        "card":         "0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(0,180,216,0.1)",
+        "hologram":     "0 0 40px rgba(var(--primary-rgb),0.2), inset 0 0 40px rgba(var(--primary-rgb),0.05)",
+        "card":         "0 20px 60px rgba(0,0,0,0.8), 0 0 0 1px rgba(var(--primary-rgb),0.1)",
       },
     },
   },
